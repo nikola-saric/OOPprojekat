@@ -1,5 +1,6 @@
 package Konzola;
 
+import java.io.IOException;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -207,7 +208,7 @@ public class RadSaIzvodjenjima {
 	}
 
 	public static void radSaIzvodjenjima(String uloga, Scanner sc,
-			IzvodjenjeServis izvodjenjeServis) {
+			IzvodjenjeServis izvodjenjeServis) throws IOException {
 		// Opcije Biletara
 		if (uloga.equals("Biletar")) {
 			pretragaIzvodjenja(sc, izvodjenjeServis);

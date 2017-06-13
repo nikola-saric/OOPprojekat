@@ -1,5 +1,6 @@
 package Konzola;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,7 +41,7 @@ public class RadSaKartama {
 		}
 	}
 
-	private static boolean prodajaKarte(Scanner sc, KartaServis kartaServis) {
+	private static boolean prodajaKarte(Scanner sc, KartaServis kartaServis) throws IOException {
 		Izvodjenje izvodjenjeKarte = null;
 		boolean postojeceIzvodjenje = false;
 		for (Izvodjenje izvodjenje : kartaServis.getIzvodjenjeServis()
@@ -97,7 +98,7 @@ public class RadSaKartama {
 	}
 
 	public static void radSaKartama(String uloga, Scanner sc,
-			KartaServis kartaServis) {
+			KartaServis kartaServis) throws IOException {
 		if (uloga.equalsIgnoreCase("biletar")) {
 			System.out.println("Odaberite zeljenu opciju: ");
 			System.out.println("1. Pretraga karte po serijskom broju.");

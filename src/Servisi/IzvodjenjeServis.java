@@ -32,16 +32,15 @@ public class IzvodjenjeServis {
 	private PredstavaServis predstavaServis;
 	private ScenaServis scenaServis;
 
-	public IzvodjenjeServis(PredstavaServis predstavaServis,
-			ScenaServis scenaServis) {
+	public IzvodjenjeServis(PredstavaServis predstavaServis, ScenaServis scenaServis) {
 		this.predstavaServis = predstavaServis;
 		this.scenaServis = scenaServis;
 	}
 
 	public void ucitajIzvodjenja() throws IOException {
 		String trenutnaLinija;
-		BufferedReader bf = new BufferedReader(new FileReader("." + this.sp
-				+ "src" + this.sp + "Datoteke" + this.sp + "Izvodjenja"));
+		BufferedReader bf = new BufferedReader(
+				new FileReader("." + this.sp + "src" + this.sp + "Datoteke" + this.sp + "Izvodjenja"));
 		while ((trenutnaLinija = bf.readLine()) != null) {
 			String[] sL = trenutnaLinija.split("\\|");
 			boolean aktivnostIzvodjenja = false;
@@ -55,16 +54,14 @@ public class IzvodjenjeServis {
 			String nazivPredstaveIzvodjenja = sL[3];
 			Predstava predstavaIzvodjenja = null;
 			for (Predstava predstava : this.predstavaServis.getListaPredstava()) {
-				if (predstava.getNazivPredstave().equalsIgnoreCase(
-						nazivPredstaveIzvodjenja)) {
+				if (predstava.getNazivPredstave().equalsIgnoreCase(nazivPredstaveIzvodjenja)) {
 					predstavaIzvodjenja = predstava;
 				}
 			}
 			String nazivSceneIzvodjenja = sL[4];
 			Scena scenaIzvodjenja = null;
 			for (Scena scena : this.scenaServis.getListaScena()) {
-				if (scena.getNazivScene()
-						.equalsIgnoreCase(nazivSceneIzvodjenja)) {
+				if (scena.getNazivScene().equalsIgnoreCase(nazivSceneIzvodjenja)) {
 					scenaIzvodjenja = scena;
 				}
 			}
@@ -79,19 +76,16 @@ public class IzvodjenjeServis {
 			calendar.set(godinaIzv, mesecIzv, danIzv, satIzv, minIzv);
 			Date vremeIzvodjenja = calendar.getTime();
 
-			Izvodjenje ucitanoIzvodjenje = new Izvodjenje(
-					identifikatorIzvodjenja, vremeIzvodjenja, cenaIzvodjenja,
-					predstavaIzvodjenja, scenaIzvodjenja,
-					listaProdatihKarataIzvodjenja, aktivnostIzvodjenja);
+			Izvodjenje ucitanoIzvodjenje = new Izvodjenje(identifikatorIzvodjenja, vremeIzvodjenja, cenaIzvodjenja,
+					predstavaIzvodjenja, scenaIzvodjenja, listaProdatihKarataIzvodjenja, aktivnostIzvodjenja);
 			this.listaIzvodjenja.add(ucitanoIzvodjenje);
 		}
 		bf.close();
 	}
 
 	public void upisiIzvodjenja() throws IOException {
-		PrintWriter upisiIzvodjenja = new PrintWriter(new FileWriter("."
-				+ this.sp + "src" + this.sp + "Datoteke" + this.sp
-				+ "Izvodjenja", false));
+		PrintWriter upisiIzvodjenja = new PrintWriter(
+				new FileWriter("." + this.sp + "src" + this.sp + "Datoteke" + this.sp + "Izvodjenja", false));
 		for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
 			DateFormat df = new SimpleDateFormat("MM;dd;yyyy;HH;mm");
 			String reportDate = df.format(izvodjenje.getPocetakIzvodjenja());
@@ -99,36 +93,30 @@ public class IzvodjenjeServis {
 			for (Karta karta : izvodjenje.getProdateKarteIzvodjenja()) {
 				prodateKarte += karta.getSerijskiBrojKarte() + ";";
 			}
-			String strUpisIzv = izvodjenje.getIdentifikatorIzvodjenja() + "|"
-					+ reportDate + "|" + izvodjenje.getCenaKarteIzvodjenja()
-					+ "|"
-					+ izvodjenje.getPredstavaIzvodjenja().getNazivPredstave()
-					+ "|" + izvodjenje.getScenaIzvodjenja().getNazivScene()
-					+ "|" + izvodjenje.isAktivnostIzvodjenja() + "|"
+			String strUpisIzv = izvodjenje.getIdentifikatorIzvodjenja() + "|" + reportDate + "|"
+					+ izvodjenje.getCenaKarteIzvodjenja() + "|"
+					+ izvodjenje.getPredstavaIzvodjenja().getNazivPredstave() + "|"
+					+ izvodjenje.getScenaIzvodjenja().getNazivScene() + "|" + izvodjenje.isAktivnostIzvodjenja() + "|"
 					+ prodateKarte;
 			upisiIzvodjenja.println(strUpisIzv);
 		}
 		upisiIzvodjenja.close();
 	}
 
-	public void ucitajKarteIzvodjenja(KartaServis kartaServis)
-			throws NumberFormatException, IOException {
+	public void ucitajKarteIzvodjenja(KartaServis kartaServis) throws NumberFormatException, IOException {
 		String trenutnaLinija;
-		BufferedReader bf = new BufferedReader(new FileReader("." + this.sp
-				+ "src" + this.sp + "Datoteke" + this.sp + "Izvodjenja"));
+		BufferedReader bf = new BufferedReader(
+				new FileReader("." + this.sp + "src" + this.sp + "Datoteke" + this.sp + "Izvodjenja"));
 		while ((trenutnaLinija = bf.readLine()) != null) {
 			String[] sL = trenutnaLinija.split("\\|");
 			if (sL.length == 7) {
 				String[] strUcitaneKarte = sL[6].split(";");
 				for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
-					if (izvodjenje.getIdentifikatorIzvodjenja() == Integer
-							.parseInt(sL[0])) {
+					if (izvodjenje.getIdentifikatorIzvodjenja() == Integer.parseInt(sL[0])) {
 						for (int i = 0; i < strUcitaneKarte.length; i++) {
 							for (Karta karta : kartaServis.getListaKarata()) {
-								if (karta.getSerijskiBrojKarte().equals(
-										strUcitaneKarte[i])) {
-									izvodjenje.getProdateKarteIzvodjenja().add(
-											karta);
+								if (karta.getSerijskiBrojKarte().equals(strUcitaneKarte[i])) {
+									izvodjenje.getProdateKarteIzvodjenja().add(karta);
 								}
 							}
 						}
@@ -139,8 +127,7 @@ public class IzvodjenjeServis {
 		bf.close();
 	}
 
-	public ArrayList<Izvodjenje> pretragaStringova(String unetaRec,
-			int izabranaOpcija) {
+	public ArrayList<Izvodjenje> pretragaStringova(String unetaRec, int izabranaOpcija) {
 		ArrayList<Izvodjenje> pronadjenaIzvodjenja = new ArrayList<>();
 		if (unetaRec == "") {
 			for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
@@ -150,40 +137,32 @@ public class IzvodjenjeServis {
 			}
 		} else if (izabranaOpcija == 1) {
 			for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
-				if ((izvodjenje.getPredstavaIzvodjenja().getNazivPredstave()
-						.toLowerCase().contains(unetaRec.toLowerCase()))
-						&& (izvodjenje.isAktivnostIzvodjenja() == true)) {
+				if ((izvodjenje.getPredstavaIzvodjenja().getNazivPredstave().toLowerCase()
+						.contains(unetaRec.toLowerCase())) && (izvodjenje.isAktivnostIzvodjenja() == true)) {
 					pronadjenaIzvodjenja.add(izvodjenje);
 				}
 
 			}
 		} else if (izabranaOpcija == 4) {
 			for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
-				if ((izvodjenje.getPredstavaIzvodjenja().getReziserPredstave()
-						.toLowerCase().contains(unetaRec.toLowerCase()))
-						&& izvodjenje.isAktivnostIzvodjenja() == true) {
+				if ((izvodjenje.getPredstavaIzvodjenja().getReziserPredstave().toLowerCase()
+						.contains(unetaRec.toLowerCase())) && izvodjenje.isAktivnostIzvodjenja() == true) {
 					pronadjenaIzvodjenja.add(izvodjenje);
 				}
 
 			}
 		} else if (izabranaOpcija == 5) {
 			for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
-				if ((izvodjenje.getPredstavaIzvodjenja().getGlumciPredstave()
-						.toLowerCase().contains(unetaRec.toLowerCase()))
-						&& izvodjenje.isAktivnostIzvodjenja() == true) {
+				if ((izvodjenje.getPredstavaIzvodjenja().getGlumciPredstave().toLowerCase()
+						.contains(unetaRec.toLowerCase())) && izvodjenje.isAktivnostIzvodjenja() == true) {
 					pronadjenaIzvodjenja.add(izvodjenje);
 				}
 			}
 		} else if (izabranaOpcija == 6) {
 			for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
-				String nazRezGlum = izvodjenje.getPredstavaIzvodjenja()
-						.getNazivPredstave()
-						+ " "
-						+ izvodjenje.getPredstavaIzvodjenja()
-								.getReziserPredstave()
-						+ " "
-						+ izvodjenje.getPredstavaIzvodjenja()
-								.getGlumciPredstave();
+				String nazRezGlum = izvodjenje.getPredstavaIzvodjenja().getNazivPredstave() + " "
+						+ izvodjenje.getPredstavaIzvodjenja().getReziserPredstave() + " "
+						+ izvodjenje.getPredstavaIzvodjenja().getGlumciPredstave();
 				if ((nazRezGlum.toLowerCase().contains(unetaRec.toLowerCase()))
 						&& izvodjenje.isAktivnostIzvodjenja() == true) {
 					pronadjenaIzvodjenja.add(izvodjenje);
@@ -191,8 +170,7 @@ public class IzvodjenjeServis {
 			}
 		} else if (izabranaOpcija == 8) {
 			for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
-				if ((izvodjenje.getScenaIzvodjenja().getNazivScene()
-						.toLowerCase().contains(unetaRec.toLowerCase()))
+				if ((izvodjenje.getScenaIzvodjenja().getNazivScene().toLowerCase().contains(unetaRec.toLowerCase()))
 						&& izvodjenje.isAktivnostIzvodjenja() == true) {
 					pronadjenaIzvodjenja.add(izvodjenje);
 				}
@@ -206,8 +184,7 @@ public class IzvodjenjeServis {
 		ArrayList<Izvodjenje> pronadjenaIzvodjenja = new ArrayList<>();
 
 		for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
-			if ((izvodjenje.getPredstavaIzvodjenja().getTipPredstave()
-					.equals(TipPredstave.valueOfOrdinal(tip)))
+			if ((izvodjenje.getPredstavaIzvodjenja().getTipPredstave().equals(TipPredstave.valueOfOrdinal(tip)))
 					&& (izvodjenje.isAktivnostIzvodjenja() == true)) {
 				pronadjenaIzvodjenja.add(izvodjenje);
 			}
@@ -218,8 +195,7 @@ public class IzvodjenjeServis {
 	public ArrayList<Izvodjenje> pretragaPoGodiniPremijere(int godinaPremijere) {
 		ArrayList<Izvodjenje> pronadjenaIzvodjenja = new ArrayList<>();
 		for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
-			if ((izvodjenje.getPredstavaIzvodjenja()
-					.getGodinaPremijerePredstave() == godinaPremijere)
+			if ((izvodjenje.getPredstavaIzvodjenja().getGodinaPremijerePredstave() == godinaPremijere)
 					&& (izvodjenje.isAktivnostIzvodjenja())) {
 				pronadjenaIzvodjenja.add(izvodjenje);
 			}
@@ -227,8 +203,7 @@ public class IzvodjenjeServis {
 		return pronadjenaIzvodjenja;
 	}
 
-	public ArrayList<Izvodjenje> pretragaPoVremenuPocetka(Date pocDatum,
-			Date krajDatum) {
+	public ArrayList<Izvodjenje> pretragaPoVremenuPocetka(Date pocDatum, Date krajDatum) {
 		ArrayList<Izvodjenje> pronadjenaIzvodjenja = new ArrayList<>();
 		for (Izvodjenje izvodenje : this.getListaIzvodjenja()) {
 			if ((pocDatum.before(izvodenje.getPocetakIzvodjenja()))
@@ -239,43 +214,36 @@ public class IzvodjenjeServis {
 		return pronadjenaIzvodjenja;
 	}
 
-	public ArrayList<Izvodjenje> sortiranjeIzvodjenja(
-			ArrayList<Izvodjenje> pronadjenaIzvodjenja, int opcijaSortiranja) {
+	public ArrayList<Izvodjenje> sortiranjeIzvodjenja(ArrayList<Izvodjenje> pronadjenaIzvodjenja,
+			int opcijaSortiranja) {
 		switch (opcijaSortiranja) {
 		case 1:
 			// Sortiranje po nazivu predstave izvodjenja.
-			Collections.sort(pronadjenaIzvodjenja,
-					new IzvodjenjeNazivPredstaveKomparator());
+			Collections.sort(pronadjenaIzvodjenja, new IzvodjenjeNazivPredstaveKomparator());
 			break;
 		case 2:
 			// Sortiranje po pocetku izvodjenja.
-			Collections.sort(pronadjenaIzvodjenja,
-					new IzvodjenjeVremePocetkaKomparator());
+			Collections.sort(pronadjenaIzvodjenja, new IzvodjenjeVremePocetkaKomparator());
 			break;
 		case 3:
 			// Sortiranje po nazivu predstave i pocetku izvodjenja.
-			Collections.sort(pronadjenaIzvodjenja,
-					new IzvodjenjeNazivIPocetakKomparator());
+			Collections.sort(pronadjenaIzvodjenja, new IzvodjenjeNazivIPocetakKomparator());
 			break;
 		case 4:
 			// Sortiranje po tipu predstave.
-			Collections.sort(pronadjenaIzvodjenja,
-					new IzvodjenjeTipPredstaveKoparator());
+			Collections.sort(pronadjenaIzvodjenja, new IzvodjenjeTipPredstaveKoparator());
 			break;
 		case 5:
 			// Sortiranje po godini premijere predstave.
-			Collections.sort(pronadjenaIzvodjenja,
-					new IzvodjenjeGodinaPremijerePredstaveKomparator());
+			Collections.sort(pronadjenaIzvodjenja, new IzvodjenjeGodinaPremijerePredstaveKomparator());
 			break;
 		case 6:
 			// Sortiranje po tipu i godini premijere predstave.
-			Collections.sort(pronadjenaIzvodjenja,
-					new IzvodjenjeTipIGodinaKomparator());
+			Collections.sort(pronadjenaIzvodjenja, new IzvodjenjeTipIGodinaKomparator());
 			break;
 		case 7:
 			// Sortiranje po nazivu scene.
-			Collections.sort(pronadjenaIzvodjenja,
-					new IzvodjenjeNazivSceneKomparator());
+			Collections.sort(pronadjenaIzvodjenja, new IzvodjenjeNazivSceneKomparator());
 			break;
 		}
 		return pronadjenaIzvodjenja;
@@ -288,8 +256,7 @@ public class IzvodjenjeServis {
 		DateFormat df = new SimpleDateFormat("MM;dd;yyyy;HH;mm");
 		String pI[] = df.format(pocetakIzvodjenja).split(";");
 		Calendar calendar = new GregorianCalendar();
-		calendar.set(Integer.parseInt(pI[2]), Integer.parseInt(pI[0]),
-				Integer.parseInt(pI[1]), Integer.parseInt(pI[3]),
+		calendar.set(Integer.parseInt(pI[2]), Integer.parseInt(pI[0]), Integer.parseInt(pI[1]), Integer.parseInt(pI[3]),
 				Integer.parseInt(pI[4]) + trajanjeIzvodjenja);
 		Date krajIzvodjenja = calendar.getTime();
 
@@ -297,19 +264,19 @@ public class IzvodjenjeServis {
 
 	}
 
-	public void dodajIzvodjenje(Predstava predstava, Scena scena,
-			Date pocetakIzvodjenja, double cena) {
+	public void dodajIzvodjenje(Predstava predstava, Scena scena, Date pocetakIzvodjenja, double cena)
+			throws IOException {
 		ArrayList<Karta> listaProdatihKarata = new ArrayList<>();
 		boolean aktivnostIzvodjenja = true;
 		int identifikatorIzvodjenja = this.listaIzvodjenja.size() + 1;
 
-		Izvodjenje novoIzvodjenje = new Izvodjenje(identifikatorIzvodjenja,
-				pocetakIzvodjenja, cena, predstava, scena, listaProdatihKarata,
-				aktivnostIzvodjenja);
+		Izvodjenje novoIzvodjenje = new Izvodjenje(identifikatorIzvodjenja, pocetakIzvodjenja, cena, predstava, scena,
+				listaProdatihKarata, aktivnostIzvodjenja);
 		this.listaIzvodjenja.add(novoIzvodjenje);
+		this.upisiIzvodjenja();
 	}
 
-	public boolean brisanjeIzvodjenja(int identifikator) {
+	public boolean brisanjeIzvodjenja(int identifikator) throws IOException {
 		boolean uspesnoObrisanoIzvodjenje = false;
 		for (Izvodjenje izvodjenje : this.listaIzvodjenja) {
 			if (izvodjenje.getIdentifikatorIzvodjenja() == identifikator
@@ -317,6 +284,7 @@ public class IzvodjenjeServis {
 				izvodjenje.setAktivnostIzvodjenja(false);
 			}
 		}
+		this.upisiIzvodjenja();
 		return uspesnoObrisanoIzvodjenje;
 	}
 

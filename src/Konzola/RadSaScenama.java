@@ -1,5 +1,6 @@
 package Konzola;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ import Entiteti.TipPredstave;
 import Servisi.ScenaServis;
 
 public class RadSaScenama {
-	public static void radSaScenama(Scanner sc, ScenaServis scenaServis) {
+	public static void radSaScenama(Scanner sc, ScenaServis scenaServis) throws IOException {
 		System.out.println("Unesite zeljenu opciju: ");
 		System.out.println("1. Unos nove scene.");
 		System.out.println("2. Prikaz svih scena.");

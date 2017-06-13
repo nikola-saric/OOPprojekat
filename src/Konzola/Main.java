@@ -34,9 +34,8 @@ public class Main {
 		//formatiranje stringova!
 		//https://www.dotnetperls.com/format-java
 		//1. Srediti formatiranje svih ispisa!
-		//2. Prilikom izmene nekih podataka te podatke treba odmah snimiti u fajl.
 		//3. Odraditi unit testove.
-		//4. Slobodna sedista!
+		
 	}
 
 }

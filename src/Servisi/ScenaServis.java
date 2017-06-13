@@ -81,7 +81,7 @@ public class ScenaServis {
 	}
 
 	public void unosNoveScene(String naziv, String tonskiTipovi, ArrayList<TipPredstave> podrzaniTipoviPredstava,
-			int brojRedova, int brojSedista) {
+			int brojRedova, int brojSedista) throws IOException {
 		ArrayList<Sediste> listaSedista = new ArrayList<>();
 		for (int i = 1; i <= brojRedova; i++) {
 			for (int j = 1; j <= brojSedista; j++) {
@@ -91,6 +91,7 @@ public class ScenaServis {
 		boolean aktivnostNoveScene = true;
 		Scena novaScena = new Scena(naziv, tonskiTipovi, podrzaniTipoviPredstava, listaSedista, aktivnostNoveScene);
 		this.listaScena.add(novaScena);
+		this.upisiScene();
 	}
 
 	public ArrayList<Scena> prikazScena() {
@@ -105,7 +106,7 @@ public class ScenaServis {
 		return aktivneScene;
 	}
 
-	public boolean brisanjeScene(String nazivScene) {
+	public boolean brisanjeScene(String nazivScene) throws IOException {
 		boolean obrisanaScena = false;
 		for (Scena scena : this.listaScena) {
 			if (scena.getNazivScene().equalsIgnoreCase(nazivScene)) {
@@ -113,6 +114,7 @@ public class ScenaServis {
 				obrisanaScena = true;
 			}
 		}
+		this.upisiScene();
 		return obrisanaScena;
 	}
 

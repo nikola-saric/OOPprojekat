@@ -148,7 +148,7 @@ public class KartaServis {
 		return slobodnaSedista;
 	}
 
-	public void prodajaKarte(Izvodjenje izvodjenje, Sediste sediste, int popust) {
+	public void prodajaKarte(Izvodjenje izvodjenje, Sediste sediste, int popust) throws IOException {
 		String serijskiBroj = Integer
 				.toString(this.getListaKarata().size() + 1);
 		double cena = izvodjenje.getCenaKarteIzvodjenja();
@@ -165,6 +165,8 @@ public class KartaServis {
 			Biletar ulogovaniBiletar = (Biletar) ulogovaniKorisnik;
 			ulogovaniBiletar.getProdateKarte().add(podataKarta);
 		}
+		izvodjenje.getProdateKarteIzvodjenja().add(podataKarta);
+		this.upisiKarte();
 	}
 
 	public ArrayList<Karta> getListaKarata() {

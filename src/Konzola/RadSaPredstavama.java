@@ -1,5 +1,6 @@
 package Konzola;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -71,7 +72,7 @@ public class RadSaPredstavama {
 		}
 	}
 
-	public static void radSaPredstavama(String uloga, Scanner sc, PredstavaServis predstavaServis) {
+	public static void radSaPredstavama(String uloga, Scanner sc, PredstavaServis predstavaServis) throws IOException {
 		// Opcije Biletara
 		if (uloga.equals("Biletar")) {
 			pretragaPredstava(sc, predstavaServis);

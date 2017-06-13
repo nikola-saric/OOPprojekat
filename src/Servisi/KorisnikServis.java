@@ -114,7 +114,8 @@ public class KorisnikServis {
 		upisiBiletare.close();
 	}
 
-	public void unosNovogKorisnika(String username, String password, String ime, String prezime, String uloga) {
+	public void unosNovogKorisnika(String username, String password, String ime, String prezime, String uloga)
+			throws IOException {
 		if (uloga.equalsIgnoreCase("menadzer")) {
 			boolean aktivnostNovogMenadzera = true;
 			Menadzer noviMenadzer = new Menadzer(username, password, ime, prezime, aktivnostNovogMenadzera,
@@ -126,9 +127,10 @@ public class KorisnikServis {
 					new ArrayList<Karta>());
 			this.listaKorisnika.add(noviBiletar);
 		}
+		this.upisiKorisnike();
 	}
 
-	public boolean brisanjeKorisnika(String username) {
+	public boolean brisanjeKorisnika(String username) throws IOException {
 		boolean uspesnaIzmena = false;
 		for (Korisnik korisnik : this.listaKorisnika) {
 			if (korisnik.getUsernameKorisnika().equals(username)) {
@@ -136,10 +138,12 @@ public class KorisnikServis {
 				uspesnaIzmena = true;
 			}
 		}
+		this.upisiKorisnike();
 		return uspesnaIzmena;
 	}
 
-	public boolean izmenaPodatakaKorisnika(String username, String noviPassword, String novoIme, String novoPrezime) {
+	public boolean izmenaPodatakaKorisnika(String username, String noviPassword, String novoIme, String novoPrezime)
+			throws IOException {
 		boolean uspesnaIzmena = false;
 
 		for (Korisnik korisnik : this.listaKorisnika) {
@@ -151,6 +155,7 @@ public class KorisnikServis {
 			}
 
 		}
+		this.upisiKorisnike();
 		return uspesnaIzmena;
 	}
 

@@ -1,5 +1,6 @@
 package Konzola;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ import Entiteti.Predstava;
 import Servisi.KorisnikServis;
 
 public class RadSaKorisnicima {
-	public static void radSaKorisnicima(KorisnikServis korisnikServis, Scanner sc) {
+	public static void radSaKorisnicima(KorisnikServis korisnikServis, Scanner sc) throws IOException {
 		System.out.println("Izaberite zeljenu opciju: ");
 		System.out.println("1. Pretraga i prikaz korisnika.");
 		System.out.println("2. Unos novog korisnika.");

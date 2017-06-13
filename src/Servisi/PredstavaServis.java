@@ -126,7 +126,7 @@ public class PredstavaServis {
 
 	public void izmenaPredstave(Predstava pronadjenaPredstava, int noviTip,
 			String noviReziser, String noviGlumci, String novaProdukcija,
-			int novaGodPrem, String noviOpis) {
+			int novaGodPrem, String noviOpis) throws IOException {
 		pronadjenaPredstava.setTipPredstave(TipPredstave
 				.valueOfOrdinal(noviTip));
 		pronadjenaPredstava.setReziserPredstave(noviReziser);
@@ -134,9 +134,11 @@ public class PredstavaServis {
 		pronadjenaPredstava.setProdukcijaPredstave(novaProdukcija);
 		pronadjenaPredstava.setGodinaPremijerePredstave(novaGodPrem);
 		pronadjenaPredstava.setOpisPredstave(noviOpis);
+		
+		this.upisiPredstave();
 	}
 
-	public boolean brisanjePredstave(String nazivPredstave) {
+	public boolean brisanjePredstave(String nazivPredstave) throws IOException {
 		boolean postojecaPredstava = false;
 		for (Predstava predstava : this.listaPredstava) {
 			if (predstava.getNazivPredstave().equalsIgnoreCase(nazivPredstave)) {
@@ -144,12 +146,13 @@ public class PredstavaServis {
 				postojecaPredstava = true;
 			}
 		}
+		this.upisiPredstave();
 		return postojecaPredstava;
 	}
 
 	public void unosNovePredstave(String naziv, int tipPredstave,
 			String imeRezisera, String glumci, int trajanje, String produkcija,
-			int godinaPremijere, String opis) {
+			int godinaPremijere, String opis) throws IOException {
 		boolean aktivnostPredstave = true;
 		Predstava novaPredstava = new Predstava(naziv,
 				TipPredstave.valueOfOrdinal(tipPredstave), imeRezisera, glumci,
@@ -160,6 +163,7 @@ public class PredstavaServis {
 			Menadzer ulogovaniMenadzer = (Menadzer) ulogovaniKorisnik;
 			ulogovaniMenadzer.getDodatePredstave().add(novaPredstava);
 		}
+		this.upisiPredstave();
 	}
 
 	public ArrayList<Predstava> getListaPredstava() {
