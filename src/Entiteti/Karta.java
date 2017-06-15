@@ -1,5 +1,7 @@
 package Entiteti;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Karta {
@@ -30,11 +32,15 @@ public class Karta {
 		if (popustKarte != 0) {
 			strPopust = Integer.toString(popustKarte);
 		}
-		return "Karta: serijski broj: " + serijskiBrojKarte + ", naziv predstave: "
-				+ izvodjenjeKarte.getPredstavaIzvodjenja().getNazivPredstave() + ", vreme izvodjenja: "
-				+ izvodjenjeKarte.getPocetakIzvodjenja() + ", naziv scene: "
-				+ izvodjenjeKarte.getScenaIzvodjenja().getNazivScene() + ", cena karte: " + cenaKarte + ", popust: "
-				+ strPopust + ", vreme izdavanja: " + vremeIzdavanjaKarte;
+		DateFormat df = new SimpleDateFormat("dd;MM;yyyy;HH:mm");
+		String pocetakIzvodjenja = df.format(izvodjenjeKarte.getPocetakIzvodjenja());
+		String vremeIzdavanja = df.format(vremeIzdavanjaKarte);
+
+		String printKarta = String.format("%1$-6s %2$-23s %3$-16s %4$-13s %5$-1s %6$-6.2f %7$-6s %8$-13s %9$-1s",
+				"| " + serijskiBrojKarte, "| " + izvodjenjeKarte.getPredstavaIzvodjenja().getNazivPredstave(),
+				"|" + pocetakIzvodjenja, "| " + izvodjenjeKarte.getScenaIzvodjenja().getNazivScene(), "|", cenaKarte,
+				"|  " + strPopust, "|" + vremeIzdavanja, "|");
+		return printKarta;
 	}
 
 	public String getSerijskiBrojKarte() {

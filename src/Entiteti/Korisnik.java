@@ -22,8 +22,9 @@ public abstract class Korisnik {
 
 	@Override
 	public String toString() {
-		return "Korisnik: username: " + usernameKorisnika + ", ime korisnika: " + imeKorisnika + ", prezime: "
-				+ prezimeKorisnika + ", aktivnost: " + aktivnostKorisnika;
+		String printKorisnika = String.format("%1$-12s %2$-15s %3$-19s %4$-1s", "| " + usernameKorisnika,
+				"| " + imeKorisnika, "| " + prezimeKorisnika, "|");
+		return printKorisnika;
 	}
 
 	public String getUsernameKorisnika() {

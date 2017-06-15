@@ -15,9 +15,10 @@ public class Biletar extends Korisnik {
 		super();
 	}
 
+
 	@Override
 	public String toString() {
-		return "Biletar: " + super.toString() + ", prodate karte: " + prodateKarte;
+		return "| Biletar  " + super.toString();
 	}
 
 	public List<Karta> getProdateKarte() {

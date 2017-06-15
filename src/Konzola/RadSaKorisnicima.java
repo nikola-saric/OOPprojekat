@@ -44,18 +44,31 @@ public class RadSaKorisnicima {
 			if (brojPronadjenihKorisnika == 0) {
 				System.out.println("Za unetu rec pretrage nema pronadjenih korisnika!");
 			} else if (brojPronadjenihKorisnika == 1) {
+				System.out.println("=============================================================");
+				System.out.println("|  Uloga   |  Username  | Ime korisnika | Prezime korisnika |");
+				System.out.println("|-----------------------------------------------------------|");
 				System.out.println(pronadjeniKorisnici.get(0));
+				System.out.println("=============================================================");
 				if (pronadjeniKorisnici.get(0).getClass() == Biletar.class) {
 					Biletar biletar = (Biletar) pronadjeniKorisnici.get(0);
 					for (Karta karta : biletar.getProdateKarte()) {
-						System.out.print(karta.getSerijskiBrojKarte());
+						System.out.print("| " + karta.getSerijskiBrojKarte() + " ");
 					}
-					System.out.println("Broj prodatih karata je: " + biletar.getProdateKarte().size());
+					System.out.println();
+					System.out.println("|-----------------------------------------------------------|");
+					System.out.println("| Broj prodatih karata je: " + biletar.getProdateKarte().size());
+					System.out.println("=============================================================");
+					System.out.println();
 				} else {
 					Menadzer menadzer = (Menadzer) pronadjeniKorisnici.get(0);
+					System.out.println("Dodate predstave: ");
+					System.out.println("=============================================================");
 					for (Predstava predstava : menadzer.getDodatePredstave()) {
-						System.out.print(predstava.getNazivPredstave());
+						System.out.println("   " + predstava.getNazivPredstave());
+						System.out.println("|-----------------------------------------------------------|");
 					}
+					System.out.println("=============================================================");
+					System.out.println();
 				}
 			} else {
 				// Sortiranje pronadjenih korisnika.
@@ -74,9 +87,13 @@ public class RadSaKorisnicima {
 					}
 				}
 				pronadjeniKorisnici = korisnikServis.sortiranjeKorisnika(pronadjeniKorisnici, opcijaSortiranja);
+				System.out.println("=============================================================");
+				System.out.println("|  Uloga   |  Username  | Ime korisnika | Prezime korisnika |");
+				System.out.println("|-----------------------------------------------------------|");
 				for (Korisnik korisnik : pronadjeniKorisnici) {
 					System.out.println(korisnik);
 				}
+				System.out.println("=============================================================");
 			}
 			break;
 		case 2:
@@ -124,18 +141,50 @@ public class RadSaKorisnicima {
 			// Izmena korisnika.
 			System.out.println("Unesite username korisnika cije podatke zelite da izmenite: ");
 			String usernameZaIzmenu = Utility.ocitajTekst(sc);
-			System.out.println("Unesite novi password korisnika: ");
-			String novaSifra = Utility.ocitajTekst(sc);
-			System.out.println("Unesite novo ime korisnika: ");
-			String novoImeKorisnika = Utility.ocitajTekst(sc);
-			System.out.println("Unesite novo prezime korisnika: ");
-			String novoPrezimeKorisnika = Utility.ocitajTekst(sc);
-			boolean uspesnaIzmena = korisnikServis.izmenaPodatakaKorisnika(usernameZaIzmenu, novaSifra,
-					novoImeKorisnika, novoPrezimeKorisnika);
-			if (uspesnaIzmena == true) {
-				System.out.println("Password je uspesno izmenjen!");
+			Korisnik korisnikZaIzmenu = null;
+			boolean postojeciKorisnik = false;
+			for (Korisnik korisnik : korisnikServis.getListaKorisnika()) {
+				if (korisnik.getUsernameKorisnika().equals(usernameZaIzmenu)) {
+					postojeciKorisnik = true;
+					korisnikZaIzmenu = korisnik;
+				}
+			}
+			if (postojeciKorisnik == false) {
+				System.out.println("Ne postoji korisnik sa unetim username-om!");
 			} else {
-				System.out.println("Doslo je do greske! ne postoji korisnik sa tim username-om.");
+				System.out.println("Da li zelite da promenite password korisnika?");
+				System.out.println("1. Da; 2. Ne");
+				int izmena = Utility.ocitajBroj(sc);
+				String novaSifra = "";
+				if (izmena == 1) {
+					System.out.println("Unesite novi password korisnika: ");
+					novaSifra = Utility.ocitajTekst(sc);
+				} else {
+					novaSifra = korisnikZaIzmenu.getPasswordKorisnika();
+				}
+				System.out.println("Da li zelite da promenite ime korisnika?");
+				System.out.println("1. Da; 2. Ne");
+				izmena = Utility.ocitajBroj(sc);
+				String novoImeKorisnika = "";
+				if (izmena == 1) {
+					System.out.println("Unesite novo ime korisnika: ");
+					novoImeKorisnika = Utility.ocitajTekst(sc);
+				} else {
+					novoImeKorisnika = korisnikZaIzmenu.getImeKorisnika();
+				}
+				System.out.println("Da li zelite da promenite prezime korisnika?");
+				System.out.println("1. Da; 2 Ne");
+				izmena = Utility.ocitajBroj(sc);
+				String novoPrezimeKorisnika = "";
+				if (izmena == 1) {
+					System.out.println("Unesite novo prezime korisnika: ");
+					novoPrezimeKorisnika = Utility.ocitajTekst(sc);
+				} else {
+					novoPrezimeKorisnika = korisnikZaIzmenu.getPrezimeKorisnika();
+				}
+				korisnikServis.izmenaPodatakaKorisnika(usernameZaIzmenu, novaSifra, novoImeKorisnika,
+						novoPrezimeKorisnika);
+				System.out.println("Uspesno ste izmenili korisnikove podatke da.");
 			}
 			break;
 		case 4:

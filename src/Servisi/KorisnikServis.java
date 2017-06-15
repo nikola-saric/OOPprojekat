@@ -142,21 +142,17 @@ public class KorisnikServis {
 		return uspesnaIzmena;
 	}
 
-	public boolean izmenaPodatakaKorisnika(String username, String noviPassword, String novoIme, String novoPrezime)
+	public void izmenaPodatakaKorisnika(String username, String noviPassword, String novoIme, String novoPrezime)
 			throws IOException {
-		boolean uspesnaIzmena = false;
-
 		for (Korisnik korisnik : this.listaKorisnika) {
 			if (korisnik.getUsernameKorisnika().equals(username)) {
 				korisnik.setPasswordKorisnika(noviPassword);
 				korisnik.setImeKorisnika(novoIme);
 				korisnik.setPrezimeKorisnika(novoPrezime);
-				uspesnaIzmena = true;
 			}
 
 		}
 		this.upisiKorisnike();
-		return uspesnaIzmena;
 	}
 
 	public ArrayList<Korisnik> pretragaKorisnika(String unetaRec, int opcijaPretrage) {

@@ -24,13 +24,13 @@ public class KartaNazivPocetakIzdavanjeKomparator implements Comparator<Karta> {
 					return 0;
 				} else if (karta1.getVremeIzdavanjaKarte().before(
 						karta2.getVremeIzdavanjaKarte())) {
-					return 1;
+					return -1;
 				}
-				return -1;
-			} else if (pocetak1.before(pocetak2)) {
 				return 1;
+			} else if (pocetak1.before(pocetak2)) {
+				return -1;
 			}
-			return -1;
+			return 1;
 		}
 		return naziv1.compareTo(naziv2);
 	}

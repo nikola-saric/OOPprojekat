@@ -1,5 +1,7 @@
 package Entiteti;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +32,13 @@ public class Izvodjenje {
 
 	@Override
 	public String toString() {
-		return "Izvodjenje: identifikator:" + identifikatorIzvodjenja + ", naziv predstave: "
-				+ predstavaIzvodjenja.getNazivPredstave() + ", tip predstave: " + predstavaIzvodjenja.getTipPredstave()
-				+ ", pocetak: " + pocetakIzvodjenja + ", scena: " + scenaIzvodjenja.getNazivScene() + ", cena karte: "
-				+ cenaKarteIzvodjenja + ", broj prodatih karata: " + prodateKarteIzvodjenja.size();
+		DateFormat df = new SimpleDateFormat("dd;MM;yyyy;HH:mm");
+		String reportDate = df.format(pocetakIzvodjenja);
+		String printIzvodjenja = String.format("%1$-5s %2$-23s %3$-7s %4$-16s %5$-13s %6$-1s %7$-6.2f %8$-1s %9$-8s %10$-1s",
+				"|  " + identifikatorIzvodjenja, "| " + predstavaIzvodjenja.getNazivPredstave(),
+				"| " + predstavaIzvodjenja.getTipPredstave(), "|" + reportDate,
+				"| " + scenaIzvodjenja.getNazivScene(),"|", cenaKarteIzvodjenja,"|", "  " + prodateKarteIzvodjenja.size(), "|");
+		return printIzvodjenja;
 	}
 
 	public int getIdentifikatorIzvodjenja() {

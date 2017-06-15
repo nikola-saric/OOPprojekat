@@ -18,7 +18,7 @@ public class Menadzer extends Korisnik {
 
 	@Override
 	public String toString() {
-		return "Menadzer: " + super.toString() + ", dodatePredstave:" + dodatePredstave;
+		return "| Menadzer " + super.toString();
 	}
 
 	public ArrayList<Predstava> getDodatePredstave() {

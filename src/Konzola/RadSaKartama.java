@@ -10,58 +10,59 @@ import Entiteti.Sediste;
 import Servisi.KartaServis;
 
 public class RadSaKartama {
-	private static void pretragaKartePoSrijskomBroju(Scanner sc,
-			KartaServis kartaServis) {
-		System.out
-				.println("Unesite serijski broj karte koju zelite da prikazete: ");
+	private static void pretragaKartePoSrijskomBroju(Scanner sc, KartaServis kartaServis) {
+		System.out.println("Unesite serijski broj karte koju zelite da prikazete: ");
 		String serijskiBrojKarte = Utility.ocitajTekst(sc);
-		Karta pronadjenaKarta = kartaServis
-				.pretragaPoSerijskomBroju(serijskiBrojKarte);
+		Karta pronadjenaKarta = kartaServis.pretragaPoSerijskomBroju(serijskiBrojKarte);
 		if (pronadjenaKarta == null) {
 			System.out.println("Ne postoji karta sa unetim serijskim brojem.");
 		} else {
+			System.out.println("==================================================================================================");
+			System.out.println("| Broj |    Naziv predstave    |     Pocetak     |    Scena    |  Cena  |Popust| Vreme izdavanja |");
+			System.out.println("|------------------------------------------------------------------------------------------------|");
 			System.out.println(pronadjenaKarta);
+			System.out.println("==================================================================================================");
 		}
 	}
 
 	private static void prikazSvihKarata(Scanner sc, KartaServis kartaServis) {
 		int opcijaSortiranja = 0;
-		while (opcijaSortiranja < 1 && opcijaSortiranja > 3) {
+		while (opcijaSortiranja < 1 || opcijaSortiranja > 3) {
 			System.out.println("Odaberite nacin sortiranja karata: ");
 			System.out.println("1. Sortiranje po vremenu izdavanja.");
 			System.out.println("2. Sortiranje po popustu.");
-			System.out
-					.println("3. Sortiranje po nazivu predstave, vremenu pocetka izvodjenja, i vremenu izdavanja karte.");
+			System.out.println(
+					"3. Sortiranje po nazivu predstave, vremenu pocetka izvodjenja, i vremenu izdavanja karte.");
 			opcijaSortiranja = Utility.ocitajBroj(sc);
 		}
-		ArrayList<Karta> sortiraneKarte = kartaServis
-				.sortiranje(opcijaSortiranja);
+		System.out.println("==================================================================================================");
+		System.out.println("| Broj |    Naziv predstave    |     Pocetak     |    Scena    |  Cena  |Popust| Vreme izdavanja |");
+		System.out.println("|------------------------------------------------------------------------------------------------|");
+		ArrayList<Karta> sortiraneKarte = kartaServis.sortiranje(opcijaSortiranja);
 		for (Karta karta : sortiraneKarte) {
 			System.out.println(karta);
 		}
+		System.out.println("==================================================================================================");
 	}
 
 	private static boolean prodajaKarte(Scanner sc, KartaServis kartaServis) throws IOException {
 		Izvodjenje izvodjenjeKarte = null;
 		boolean postojeceIzvodjenje = false;
-		for (Izvodjenje izvodjenje : kartaServis.getIzvodjenjeServis()
-				.getListaIzvodjenja()) {
-			System.out.println(izvodjenje.getIdentifikatorIzvodjenja() + "   "
+		for (Izvodjenje izvodjenje : kartaServis.getIzvodjenjeServis().getListaIzvodjenja()) {
+			System.out.println(izvodjenje.getIdentifikatorIzvodjenja() + " |"
 					+ izvodjenje.getPredstavaIzvodjenja().getNazivPredstave());
 		}
 		while (postojeceIzvodjenje == false) {
 			System.out.println("Unesite identifikator izvodjenja: ");
 			int identifikatorIzvodjenja = Utility.ocitajBroj(sc);
-			for (Izvodjenje izvodjenje : kartaServis.getIzvodjenjeServis()
-					.getListaIzvodjenja()) {
+			for (Izvodjenje izvodjenje : kartaServis.getIzvodjenjeServis().getListaIzvodjenja()) {
 				if (izvodjenje.getIdentifikatorIzvodjenja() == identifikatorIzvodjenja) {
 					izvodjenjeKarte = izvodjenje;
 					postojeceIzvodjenje = true;
 				}
 			}
 		}
-		ArrayList<Sediste> slobodnaSedista = kartaServis
-				.slobodnaSedista(izvodjenjeKarte);
+		ArrayList<Sediste> slobodnaSedista = kartaServis.slobodnaSedista(izvodjenjeKarte);
 		if (slobodnaSedista.size() == 0) {
 			return false;
 		}
@@ -77,8 +78,7 @@ public class RadSaKartama {
 			int brojSedista = Utility.ocitajBroj(sc);
 
 			for (Sediste sediste : slobodnaSedista) {
-				if ((sediste.getRedSedista() == redSedista)
-						&& (sediste.getBrojSedista() == brojSedista)) {
+				if ((sediste.getRedSedista() == redSedista) && (sediste.getBrojSedista() == brojSedista)) {
 					unetoSediste = sediste;
 					postojeceSediste = true;
 				}
@@ -97,8 +97,7 @@ public class RadSaKartama {
 		return true;
 	}
 
-	public static void radSaKartama(String uloga, Scanner sc,
-			KartaServis kartaServis) throws IOException {
+	public static void radSaKartama(String uloga, Scanner sc, KartaServis kartaServis) throws IOException {
 		if (uloga.equalsIgnoreCase("biletar")) {
 			System.out.println("Odaberite zeljenu opciju: ");
 			System.out.println("1. Pretraga karte po serijskom broju.");
@@ -118,8 +117,7 @@ public class RadSaKartama {
 				if (prodajaKarte == true) {
 					System.out.println("Karta je uspesno prodata.");
 				} else {
-					System.out
-							.println("Za uneto izvodjenje su rasprodata sva sedista!");
+					System.out.println("Za uneto izvodjenje su rasprodata sva sedista!");
 				}
 				break;
 			default:

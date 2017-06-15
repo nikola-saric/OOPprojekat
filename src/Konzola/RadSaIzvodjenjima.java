@@ -15,16 +15,14 @@ import Servisi.IzvodjenjeServis;
 
 public class RadSaIzvodjenjima {
 
-	public static void pretragaIzvodjenja(Scanner sc,
-			IzvodjenjeServis izvodjenjeServis) {
+	public static void pretragaIzvodjenja(Scanner sc, IzvodjenjeServis izvodjenjeServis) {
 
 		System.out.println("Unesite nacin pretrage izvodjenja: ");
 		System.out.println("1. Pretraga po nazivu predstave.");
 		System.out.println("2. Pretraga po tipu predstave.");
 		System.out.println("3. Pretraga po godini premijere predstave.");
 		System.out.println("4. Pretraga po reziseru predstave.");
-		System.out
-				.println("5. Pretraga po glumcima koji ucestvuju u predstavi.");
+		System.out.println("5. Pretraga po glumcima koji ucestvuju u predstavi.");
 		System.out.println("6. Pretraga po nazivu, reziseru i glumcima.");
 		System.out.println("7. Pretraga po vremenu pocetka predstave.");
 		System.out.println("8. Pretraga po nazivu scene.");
@@ -34,8 +32,7 @@ public class RadSaIzvodjenjima {
 		case 1:
 			System.out.println("Unesite naziv predstave: ");
 			String nazivPredstavePret = Utility.ocitajTekst(sc);
-			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(
-					nazivPredstavePret, vasaOpcija);
+			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(nazivPredstavePret, vasaOpcija);
 			break;
 		case 2:
 			boolean postojeciTip = false;
@@ -47,35 +44,29 @@ public class RadSaIzvodjenjima {
 				if ((odabraniTip > 0) && (odabraniTip < 4)) {
 					postojeciTip = true;
 				}
-				System.out
-						.println("Uneli ste nepostojeci tip, pokusajte ponovo!");
+				System.out.println("Uneli ste nepostojeci tip, pokusajte ponovo!");
 			}
-			pronadjenaIzvodjenja = izvodjenjeServis
-					.pretragaPoTipuPredstave(odabraniTip);
+			pronadjenaIzvodjenja = izvodjenjeServis.pretragaPoTipuPredstave(odabraniTip);
 			break;
 		case 3:
 			System.out.println("Unesite godinu premijere predstave: ");
 			int godinaPremPret = Utility.ocitajBroj(sc);
-			pronadjenaIzvodjenja = izvodjenjeServis
-					.pretragaPoGodiniPremijere(godinaPremPret);
+			pronadjenaIzvodjenja = izvodjenjeServis.pretragaPoGodiniPremijere(godinaPremPret);
 			break;
 		case 4:
 			System.out.println("Unesite ime rezisera predstave: ");
 			String reziserPredstavePret = Utility.ocitajTekst(sc);
-			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(
-					reziserPredstavePret, vasaOpcija);
+			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(reziserPredstavePret, vasaOpcija);
 			break;
 		case 5:
 			System.out.println("Unesite imena glumaca: ");
 			String glumciPredstavePret = Utility.ocitajTekst(sc);
-			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(
-					glumciPredstavePret, vasaOpcija);
+			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(glumciPredstavePret, vasaOpcija);
 			break;
 		case 6:
 			System.out.println("Unesite naziv predstave, rezisera i glumce: ");
 			String nazRezGlumPret = Utility.ocitajTekst(sc);
-			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(
-					nazRezGlumPret, vasaOpcija);
+			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(nazRezGlumPret, vasaOpcija);
 			break;
 		case 7:
 			Date pocDatum = null;
@@ -114,14 +105,12 @@ public class RadSaIzvodjenjima {
 					System.out.println("Uneti krajnji datum je pre pocetnog!");
 				}
 			}
-			pronadjenaIzvodjenja = izvodjenjeServis.pretragaPoVremenuPocetka(
-					pocDatum, krajDatum);
+			pronadjenaIzvodjenja = izvodjenjeServis.pretragaPoVremenuPocetka(pocDatum, krajDatum);
 			break;
 		case 8:
 			System.out.println("Unesite naziv scene: ");
 			String nazivScenePret = Utility.ocitajTekst(sc);
-			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(
-					nazivScenePret, vasaOpcija);
+			pronadjenaIzvodjenja = izvodjenjeServis.pretragaStringova(nazivScenePret, vasaOpcija);
 			break;
 		default:
 			System.out.println("Uneli ste nepostojecu opciju!");
@@ -133,22 +122,29 @@ public class RadSaIzvodjenjima {
 			while (opcijaSortiranja < 1 || opcijaSortiranja > 7) {
 				System.out.println("Izaberite opciju sortiranja: ");
 				System.out.println("1. Sortiranje po nazivu predstave.");
-				System.out
-						.println("2. Sortiranje po vremenu pocetka izvodjenja.");
-				System.out
-						.println("3. Sortiranje po vremenu pocetka i predstave.");
+				System.out.println("2. Sortiranje po vremenu pocetka izvodjenja.");
+				System.out.println("3. Sortiranje po nazivu predstave i vremenu pocetka.");
 				System.out.println("4. Sortiranje po tipu predstave.");
 				System.out.println("5. Sortiranje po godini premijere.");
-				System.out
-						.println("6. Sortiranje po tipu i godini premijere predstave.");
+				System.out.println("6. Sortiranje po tipu i godini premijere predstave.");
 				System.out.println("7. Sortiranje po nazivu scene.");
+				opcijaSortiranja = Utility.ocitajBroj(sc);
 			}
-			ArrayList<Izvodjenje> sortiranaIzvodjenja = izvodjenjeServis
-					.sortiranjeIzvodjenja(pronadjenaIzvodjenja,
-							opcijaSortiranja);
+			ArrayList<Izvodjenje> sortiranaIzvodjenja = izvodjenjeServis.sortiranjeIzvodjenja(pronadjenaIzvodjenja,
+					opcijaSortiranja);
+			System.out.println(
+					"===========================================================================================");
+			System.out.println(
+					"|Ident|    Naziv predstave    |  Tip  |     Pocetak     |    Scena    |  Cena  |Prod karte|");
+			System.out.println(
+					"|-----------------------------------------------------------------------------------------|");
 			for (Izvodjenje izvodjenje : sortiranaIzvodjenja) {
 				System.out.println(izvodjenje);
 			}
+			System.out.println(
+					"===========================================================================================");
+		} else {
+			System.out.println("Nema pronadjenih izvodjenja.");
 		}
 	}
 
@@ -200,15 +196,14 @@ public class RadSaIzvodjenjima {
 				System.out.println("Uneli ste nepostojeci broj minuta!");
 			}
 		}
-		calendar.set(godinaIzvodjenja, mesecIzvodjenja, danIzvodjenja,
-				satIzvodjenja, minutIzvodjenja);
+		calendar.set(godinaIzvodjenja, mesecIzvodjenja, danIzvodjenja, satIzvodjenja, minutIzvodjenja);
 		Date pocetakIzvodjenja = calendar.getTime();
 
 		return pocetakIzvodjenja;
 	}
 
-	public static void radSaIzvodjenjima(String uloga, Scanner sc,
-			IzvodjenjeServis izvodjenjeServis) throws IOException {
+	public static void radSaIzvodjenjima(String uloga, Scanner sc, IzvodjenjeServis izvodjenjeServis)
+			throws IOException {
 		// Opcije Biletara
 		if (uloga.equals("Biletar")) {
 			pretragaIzvodjenja(sc, izvodjenjeServis);
@@ -225,8 +220,8 @@ public class RadSaIzvodjenjima {
 				pretragaIzvodjenja(sc, izvodjenjeServis);
 				break;
 			case 2:
-				for (Predstava predstava : izvodjenjeServis
-						.getPredstavaServis().getListaPredstava()) {
+				System.out.println("Nazivi predstava: ");
+				for (Predstava predstava : izvodjenjeServis.getPredstavaServis().getListaPredstava()) {
 					System.out.println(predstava.getNazivPredstave());
 				}
 				boolean postojecaPredstava = false;
@@ -235,10 +230,8 @@ public class RadSaIzvodjenjima {
 				while (postojecaPredstava == false) {
 					System.out.println("Unesite naziv predstave izvodjenja: ");
 					nazivPredstave = Utility.ocitajTekst(sc);
-					for (Predstava predstava : izvodjenjeServis
-							.getPredstavaServis().getListaPredstava()) {
-						if (predstava.getNazivPredstave().equalsIgnoreCase(
-								nazivPredstave)) {
+					for (Predstava predstava : izvodjenjeServis.getPredstavaServis().getListaPredstava()) {
+						if (predstava.getNazivPredstave().equalsIgnoreCase(nazivPredstave)) {
 							predstavaIzvodjenja = predstava;
 							postojecaPredstava = true;
 						}
@@ -246,49 +239,40 @@ public class RadSaIzvodjenjima {
 				}
 				Date pocetakIzvodjenja = unosDatuma(sc);
 
-				for (Scena scena : izvodjenjeServis.getScenaServis()
-						.getListaScena()) {
-					System.out.println(scena.getNazivScene());
+				System.out.println("Nazivi scena: ");
+				for (Scena scena : izvodjenjeServis.getScenaServis().getListaScena()) {
+					if (scena.getPodrzaniTipoviScene().contains(predstavaIzvodjenja.getTipPredstave())) {
+						System.out.println(scena.getNazivScene());
+					}
+					
 				}
 				boolean postojecaScena = false;
 				String nazivScene = "";
 				Scena scenaIzvodjenja = null;
 				while (postojecaScena == false) {
-					System.out.println("Unesite naziv scene izvodjenja");
+					System.out.println("Unesite naziv scene izvodjenja: ");
 					nazivScene = Utility.ocitajTekst(sc);
 					// Proverava da li postoji scena sa unetim imenom, ako
 					// postoji proverava se da li se na pronadjenoj sceni vec
 					// izvodi predstava, ili je scena slobodna.
-					for (Scena scena : izvodjenjeServis.getScenaServis()
-							.getListaScena()) {
+					for (Scena scena : izvodjenjeServis.getScenaServis().getListaScena()) {
 						if (scena.getNazivScene().equalsIgnoreCase(nazivScene)) {
-							Date krajIzvodjenja = izvodjenjeServis
-									.krajIzvodjenja(predstavaIzvodjenja,
-											pocetakIzvodjenja);
+							Date krajIzvodjenja = izvodjenjeServis.krajIzvodjenja(predstavaIzvodjenja,
+									pocetakIzvodjenja);
 
 							boolean zauzetaScena = false;
-							for (Izvodjenje izvodjenje : izvodjenjeServis
-									.getListaIzvodjenja()) {
-								Date getKrajIzvodjenja = izvodjenjeServis
-										.krajIzvodjenja(izvodjenje
-												.getPredstavaIzvodjenja(),
-												izvodjenje
-														.getPocetakIzvodjenja());
+							for (Izvodjenje izvodjenje : izvodjenjeServis.getListaIzvodjenja()) {
+								Date getKrajIzvodjenja = izvodjenjeServis.krajIzvodjenja(
+										izvodjenje.getPredstavaIzvodjenja(), izvodjenje.getPocetakIzvodjenja());
 								if ((izvodjenje.getScenaIzvodjenja() == scena)
-										&& (pocetakIzvodjenja.before(izvodjenje
-												.getPocetakIzvodjenja()) == true)
-										&& (krajIzvodjenja.before(izvodjenje
-												.getPocetakIzvodjenja()) == false)) {
-									System.out
-											.println("Izabrana scena je zauzeta, unesite drugu!");
+										&& (pocetakIzvodjenja.before(izvodjenje.getPocetakIzvodjenja()) == true)
+										&& (krajIzvodjenja.before(izvodjenje.getPocetakIzvodjenja()) == false)) {
+									System.out.println("Izabrana scena je zauzeta, unesite drugu!");
 									zauzetaScena = true;
 								} else if ((izvodjenje.getScenaIzvodjenja() == scena)
-										&& (izvodjenje.getPocetakIzvodjenja()
-												.before(pocetakIzvodjenja) == true)
-										&& (getKrajIzvodjenja
-												.before(pocetakIzvodjenja) == false)) {
-									System.out
-											.println("Izabrana scena je zauzeta, unesite drugu!");
+										&& (izvodjenje.getPocetakIzvodjenja().before(pocetakIzvodjenja) == true)
+										&& (getKrajIzvodjenja.before(pocetakIzvodjenja) == false)) {
+									System.out.println("Izabrana scena je zauzeta, unesite drugu!");
 									zauzetaScena = true;
 								}
 							}
@@ -301,27 +285,31 @@ public class RadSaIzvodjenjima {
 				}
 				System.out.println("Unesite cenu karte ovog izvodjenja: ");
 				double cenaIzvodjenja = Utility.ocitajDouble(sc);
-				izvodjenjeServis.dodajIzvodjenje(predstavaIzvodjenja,
-						scenaIzvodjenja, pocetakIzvodjenja, cenaIzvodjenja);
+				izvodjenjeServis.dodajIzvodjenje(predstavaIzvodjenja, scenaIzvodjenja, pocetakIzvodjenja,
+						cenaIzvodjenja);
 				System.out.println("Uspesno ste dodali novo izvodjenje!");
 				break;
 			case 3:
 				// Brisanje izvodjenja.
-				for (Izvodjenje izvodjenje : izvodjenjeServis
-						.getListaIzvodjenja()) {
+				System.out.println(
+						"-------------------------------------------------------------------------------------------");
+				System.out.println(
+						"|Ident|    Naziv predstave    |  Tip  |     Pocetak     |    Scena    |  Cena  |Prod karte|");
+				System.out.println(
+						"-------------------------------------------------------------------------------------------");
+				for (Izvodjenje izvodjenje : izvodjenjeServis.getListaIzvodjenja()) {
 					System.out.println(izvodjenje);
 				}
-				System.out
-						.println("Unesite identifikator izvodjenja koje zelite da obrisete: ");
+				System.out.println(
+						"-------------------------------------------------------------------------------------------");
+				System.out.println("Unesite identifikator izvodjenja koje zelite da obrisete: ");
 				int identifikatorIzvodjenja = Utility.ocitajBroj(sc);
-				boolean uspesnoBrisanjeIzvodjenja = izvodjenjeServis
-						.brisanjeIzvodjenja(identifikatorIzvodjenja);
+				boolean uspesnoBrisanjeIzvodjenja = izvodjenjeServis.brisanjeIzvodjenja(identifikatorIzvodjenja);
 				if (uspesnoBrisanjeIzvodjenja == true) {
-					System.out
-							.println("Odabrano izvodjenje je uspesno izbrisano.");
+					System.out.println("Odabrano izvodjenje je uspesno izbrisano.");
 				} else {
-					System.out
-							.println("Ne postoji izvodjenje sa unetim identifikatorom ili za njega postoje prodate karte.");
+					System.out.println(
+							"Ne postoji izvodjenje sa unetim identifikatorom ili za njega postoje prodate karte.");
 				}
 				break;
 			default:

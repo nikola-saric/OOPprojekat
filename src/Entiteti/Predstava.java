@@ -31,10 +31,32 @@ public class Predstava {
 
 	@Override
 	public String toString() {
-		return "Predstava: naziv predstave: " + nazivPredstave + ", reziser predstave: " + reziserPredstave
-				+ ", glumci u presdavi: " + glumciPredstave + ", trajanje predstave: " + trajanjePredstave
-				+ ", produkcija predstave: " + produkcijaPredstave + ", godina premijere: " + godinaPremijerePredstave
-				+ ", opis predstave:" + opisPredstave;
+		String glumci = this.glumciPredstave;
+		if (glumci.length() > 38) {
+			glumci = glumci.substring(0, 38);
+		}
+		String naziv = this.nazivPredstave;
+		if (naziv.length() > 21) {
+			naziv = naziv.substring(0, 21);
+		}
+		String reziser = this.reziserPredstave;
+		if (reziser.length() > 18) {
+			reziser = reziser.substring(0, 18);
+		}
+		String produkcija = this.produkcijaPredstave;
+		if (produkcija.length() > 18) {
+			produkcija = produkcija.substring(0, 18);
+		}
+		String opis = this.opisPredstave;
+		if (opis.length() > 18) {
+			opis = opis.substring(0, 18);
+		}
+		String printPredstava = String.format("%1$-23s %2$-8s %3$-20s %4$-40s %5$-10s %6$-20s %7$-8s %8$-20s %9$-1s",
+				"| " + nazivPredstave, "| " + tipPredstave, "| " + reziserPredstave, "| " + glumci,
+				"|   " + trajanjePredstave, "| " + produkcijaPredstave, "|  " + godinaPremijerePredstave,
+				"| " + opisPredstave, "|");
+
+		return printPredstava;
 	}
 
 	public String getNazivPredstave() {

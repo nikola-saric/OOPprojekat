@@ -66,10 +66,15 @@ public class RadSaScenama {
 		case 2:
 			// Prikaz scena sortiranih po nazivu.
 			System.out.println("Scene sortirane po nazivu: ");
+			System.out.println("=================================================================");
+			System.out.println("|  Naziv scene  | Tonski zapis |   Tipovi predstave  | Sedista  |");
+			System.out.println("|---------------------------------------------------------------|");
 			ArrayList<Scena> listaSortiranihScena = scenaServis.prikazScena();
 			for (Scena scena : listaSortiranihScena) {
 				System.out.println(scena);
 			}
+			System.out.println("=================================================================");
+			
 			break;
 		case 3:
 			// Brisanje scene.

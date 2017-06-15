@@ -17,7 +17,7 @@ public class IzvodjenjeNazivIPocetakKomparator implements
 		if (naziv1.equals(naziv2)) {
 			if (izvodjenje1.getPocetakIzvodjenja().before(
 					izvodjenje2.getPocetakIzvodjenja())) {
-				return 1;
+				return -1;
 			}
 			return 0;
 		}

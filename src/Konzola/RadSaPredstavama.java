@@ -24,7 +24,12 @@ public class RadSaPredstavama {
 			if (pronadjenaPredstava == null) {
 				System.out.println("Ne postoji predstava sa unetim imenom!");
 			} else {
+				System.out.println("==============================================================================================================================================================");
+				System.out.println("|    Naziv predstave    |  Tip   |       Reziser      |                Glumci                  | Trajanje |     Produkcija     | Godina |        Opis        |");
+				System.out.println("|------------------------------------------------------------------------------------------------------------------------------------------------------------|");
 				System.out.println(pronadjenaPredstava);
+				System.out.println("==============================================================================================================================================================");
+
 			}
 			break;
 		case 2:
@@ -61,9 +66,13 @@ public class RadSaPredstavama {
 				}
 				ArrayList<Predstava> sortiranePredstave = predstavaServis.sortiranjePredstava(pronadjenePredstave,
 						opcijaSortiranja);
+				System.out.println("==============================================================================================================================================================");
+				System.out.println("|    Naziv predstave    |  Tip   |       Reziser      |                Glumci                  | Trajanje |     Produkcija     | Godina |        Opis        |");
+				System.out.println("|------------------------------------------------------------------------------------------------------------------------------------------------------------|");
 				for (Predstava predstava : sortiranePredstave) {
 					System.out.println(predstava);
 				}
+				System.out.println("==============================================================================================================================================================");
 			}
 			break;
 		default:

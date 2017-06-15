@@ -25,8 +25,9 @@ public class Scena {
 
 	@Override
 	public String toString() {
-		return "Scena: naziv scene: " + nazivScene + ", tipovi tonskog zapisac scene: " + tipoviTonskogZapisaScene
-				+ ", podrzani tipovi scene: " + podrzaniTipoviScene;
+		String printScena = String.format("%1$-15s %2$-14s %3$-21s %4$-2s %5$-7d %6$-1s","| " + nazivScene,
+				"| " +tipoviTonskogZapisaScene, podrzaniTipoviScene, "|", sedistaScene.size(), "|");
+		return printScena;
 	}
 
 	public String getNazivScene() {
